@@ -10,9 +10,13 @@ public class Compte implements Serializable {
         solde = depotInit;
     }
 
-    public double getSolde(){ return solde; }
-    public void deposer ( double depot) { solde += depot; }
-    public void retirer ( double retrait) { solde -= retrait; }
+
+    public void deposer ( double depot) {
+        solde += depot;
+    }
+    public void retirer ( double retrait) {
+        solde -= retrait;
+    }
     public String toString(){
         return code + " | Solde : " + solde + " | " + Proprietaire.getMonAgence().getNumero() + " | " + Proprietaire.getCode();
     }
@@ -21,10 +25,15 @@ public class Compte implements Serializable {
         return (A.code.equals(this.code));
     }
 
+    public double getSolde(){ return solde; }
     public String getCode() {
         return code;
+    }
+    public Client getProprietaire() {
+        return Proprietaire;
     }
     public void setCode(String code) {
         this.code = code;
     }
+
 }

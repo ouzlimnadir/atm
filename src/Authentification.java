@@ -1,15 +1,17 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Authentification {
     private Client Cl;
     private int password;
+    private int compte;
+    private final char h='h',m='m',b='b';
 
     public Authentification(Client C){
         this.Cl = C;
     }
     public boolean connect(){
         int width = 30;
-        char h='h',m='m',b='b';
         Scanner clavier = new Scanner(System.in);
         int i=3;
         do {
@@ -35,7 +37,6 @@ public class Authentification {
     }
     public int menu(){
         int width = 30;
-        char h='h',m='m',b='b';
         Scanner clavier = new Scanner(System.in);
         int choix;
         do {
@@ -61,9 +62,8 @@ public class Authentification {
         } while ((choix>6)||(choix<0)) ;
         return choix;
     }
-    public int compte(){
+    public void compte(){
         int width = 30;
-        char h='h',m='m',b='b';
         Scanner clavier = new Scanner(System.in);
         int choix;
         do{
@@ -81,16 +81,37 @@ public class Authentification {
                 cadreBarre(width,b);
             }
         } while ((choix>2)||(choix<1));
-        return choix;
+        compte = choix-1;
     }
+    public void retrait() throws IOException, SecurityException, ClassNotFoundException{
+        int width = 80;
+        double somme = -1.11 ;
+        Scanner clavier = new Scanner(System.in);
+        cadreString("retrait",width);
+        do {
+            if(somme!=-1.11)
+                erreur(width);
+            cadreBarre(width, h);
+            nonCadreString("Somme a retirer",width);
+            System.out.print("|          ");
+            somme = clavier.nextDouble();
+            cadreBarre(width, b);
+        } while((somme<Cl.getCompte(compte).getSolde())&&(somme<=0));
+        Cl.retirer(compte,somme);
+        Cl.getMonAgence().update();
+    }
+    public void depot(){}
+    public void virement(){}
+    public void solde(){}
+    public void releve(){}
+    public void sure(){}
+
 
     public void fin(int L){
-        char h='h',m='m',b='b';
         cadreBarre(L,h);
         cadreString("FIN DU PROGRAMME", L);
         cadreBarre(L,b);
     }
-
     public void cadreString(String s,int L){
         char barrette = '|';
         L -= (s.length()+2);
@@ -131,5 +152,10 @@ public class Authentification {
         for(int i=0; i<L-2; i++)
             System.out.print(" ");
         System.out.println(barrette);
+    }
+    public void erreur(int wid){
+        cadreBarre(wid, h);
+        cadreString("Saisie erronee", wid);
+        cadreBarre(wid, b);
     }
 }

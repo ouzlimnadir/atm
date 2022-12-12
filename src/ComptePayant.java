@@ -16,4 +16,12 @@ public class ComptePayant extends Compte {
     public String toString(){
         return super.toString() + " | Taux doperation : " + TAUX_OPERATION;
     }
+
+    public static int getCompteur() {
+        return compteur;
+    }
+
+    public static void setCompteur(int compteur) {
+        ComptePayant.compteur = compteur;
+    }
 }

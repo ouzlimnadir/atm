@@ -13,10 +13,17 @@ public class CompteEpargne extends Compte {
         this(sonClient, 0);
     }
 
-    public double getTaux(){ return taux;}
-    public static void setTaux(double taux){ CompteEpargne.taux = taux; }
     public void calculInteret(){ solde *= 1 + (taux/100); }
     public String toString(){
         return super.toString() + " | Taux dinteret : " + taux;
+    }
+
+    public double getTaux(){ return taux;}
+    public static int getCompteur() {
+        return compteur;
+    }
+    public static void setTaux(double taux){ CompteEpargne.taux = taux; }
+    public static void setCompteur(int compteur) {
+        CompteEpargne.compteur = compteur;
     }
 }

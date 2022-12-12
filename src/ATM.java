@@ -2,7 +2,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-
+/**
+ * todo list
+ * 1- compteur des operations
+ * 2- reste d'autentifications
+ */
 public class ATM {
     public static void main (String[] args) throws IOException, ClassNotFoundException {
         // Au demarrage du programme, celui ci remet les compteurs en fonction des fichiers disponibles
@@ -25,7 +29,7 @@ public class ATM {
 
         Authentification Auth = new Authentification(CL0);
         if(Auth.connect()){
-            CM0 = CL0.getCompte(Auth.compte()-1);
+            Auth.compte();
             int menu;
             do {
                 switch ( menu = Auth.menu() ){
@@ -47,10 +51,20 @@ public class ATM {
     }
     public static void progTest() throws IOException, ClassNotFoundException{
         // Simunation d'un compte deja existant
-        Agence A0001 = new Agence("Agadir salam");
-        Client C0001 = new Client(A0001,"OUZLIM","Nadir","Immeuble 5 N55 Salam Agadir");
-        C0001.setPassword(1234);
-        Compte CM1 = new ComptePayant(C0001,8000);
-        Compte CM2 = new CompteEpargne(C0001,50000);
+        Agence A01 = new Agence("Agadir salam");
+        Client C01 = new Client(A01,"OUZLIM","Nadir","Immeuble 5 N55 Salam");
+        C01.setPassword(1234);
+        Compte CM1 = new ComptePayant(C01,8000);
+        Compte CM2 = new CompteEpargne(C01,50000);
+
+        Agence A02 = new Agence("Agadir Dakhla");
+        Client C02 = new Client(A02,"Alaoui","Ahmed","Secteur B Villa 8 Sonaba");
+        C01.setPassword(2222);
+        Compte CM3 = new ComptePayant(C02,10000);
+        Compte CM4 = new CompteEpargne(C02,1000);
+
+        Client C03 = new Client(A02,"BAKA","Mohamed","Residence lka=hair Talborjt");
+        C01.setPassword(3333);
+        Compte CM5 = new ComptePayant(C03,5000);
     }
 }

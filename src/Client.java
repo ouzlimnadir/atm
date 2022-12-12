@@ -22,28 +22,6 @@ public class Client implements Serializable{
         agenceClient.addClient(this);
     }
 
-    public Agence getMonAgence() {
-        return monAgence;
-    }
-
-    public void setPassword(int password) {
-        this.password = password;
-    }
-
-    public int getPassword() {
-        return password;
-    }
-
-    public Compte getCompte(int i){ return mesComptes[i]; }
-
-    public static int getCompteur() {
-        return compteur;
-    }
-
-    public static void setCompteur(int compteur) {
-        Client.compteur = compteur;
-    }
-
     public void addCompte(Compte nvCompte) throws IOException, SecurityException, ClassNotFoundException{
         if(iCompte < MAX_COMPTES) {
             mesComptes[iCompte++] = nvCompte;
@@ -58,33 +36,52 @@ public class Client implements Serializable{
         else
             return false;
     }
-    public void retirer(int i, double money){ mesComptes[i].retirer(money); }
+    public void retirer(int i, double money){
+        mesComptes[i].retirer(money);
+    }
+
+    public String toString(){
+        return code + " | " + monAgence.getNumero() + " | Nom : " + nom + " | Prenom : " + prenom + " | Adresse : " + adresse + " | nbComptes : " + iCompte;
+    }
+    public boolean equals(Client A){
+        return (A.code.equals(this.code));
+    }
+
+    public Agence getMonAgence() {
+        return monAgence;
+    }
     public int getNbComptes(){ return iCompte; }
     public String getCode(){ return code; }
     public String getNom() {
         return nom;
     }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
     public String getPrenom() {
         return prenom;
-    }
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
     }
     public String getAdresse() {
         return adresse;
     }
+    public int getPassword() {
+        return password;
+    }
+    public static int getCompteur() {
+        return compteur;
+    }
+    public Compte getCompte(int i){ return mesComptes[i]; }
+
+    public void setPassword(int password) {
+        this.password = password;
+    }
+    public static void setCompteur(int compteur) {
+        Client.compteur = compteur;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
-    public String toString(){
-        return code + " | " + monAgence.getNumero() + " | Nom : " + nom + " | Prenom : " + prenom + " | Adresse : " + adresse + " | nbComptes : " + iCompte;
-    }
-
-    public boolean equals(Client A){
-        return (A.code.equals(this.code));
-    }
-
 }

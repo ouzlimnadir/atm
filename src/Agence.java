@@ -22,8 +22,6 @@ public class Agence implements Serializable {
         save();
     }
 
-    public Compte getCompte(int i) { return lesComptes[i]; }
-    public Client getClient(int i) { return lesClients[i]; }
     public void addCompte (Compte nvCompte) throws IOException, SecurityException, ClassNotFoundException{
         if(iCompte < MAX_COMPTES) lesComptes[iCompte++] = nvCompte;
         update();
@@ -32,17 +30,14 @@ public class Agence implements Serializable {
         if(iClient < MAX_CLIENTS) lesClients[iClient++] = nvClient;
         update();
     }
-    public int getNbClients() { return iClient; }
-    public int getNbComptes() { return iCompte; }
+
     public String toString() {
         return numero + " | Adresse : " + adresse + " | nb Clients : " + iClient + " | nb Comptes : " + iCompte;
     }
-    public String getNumero() { return numero; }
 
     public boolean equals(Agence A){
         return (A.numero.equals(this.numero));
     }
-
     public void save() throws IOException, SecurityException, ClassNotFoundException{
         File f1 = new File (monFic);
         if(f1.exists()){
@@ -86,7 +81,6 @@ public class Agence implements Serializable {
         }
 
     }
-
     public void update() throws IOException, SecurityException, ClassNotFoundException{
         File f1 = new File (monFic);
         if(f1.exists()){
@@ -124,7 +118,6 @@ public class Agence implements Serializable {
         }
 
     }
-
     public static void read() throws IOException, ClassNotFoundException{
         File f1 = new File (monFic);
         FileInputStream fis = new FileInputStream(f1);
@@ -139,7 +132,6 @@ public class Agence implements Serializable {
         }
         ois.close(); fis.close();
     }
-
     public static void demarrage() throws IOException, ClassNotFoundException{
         File f1 = new File(monFic);
         if(f1.exists()){
@@ -156,16 +148,29 @@ public class Agence implements Serializable {
                     compteur=a;
                 // Set Compteur de client au demarrage du programme
                 for(int i=0; i<A.iClient; i++) {
-                    c = Integer.parseInt(String.valueOf(A.lesClients[i].getCode().charAt(A.lesClients[i].getCode().length()-1)));
+                    c = Integer.parseInt(A.lesClients[i].getCode().substring(A.lesComptes[i].getClass().getName().length()+1));
                     if(c>Client.getCompteur())
                         Client.setCompteur(c);
                 }
                 // Set Compteur de comptes au demarrage du programme
-
+                for(int i=0; i<A.iCompte; i++){
+                    m = Integer.parseInt(A.lesComptes[i].getCode().substring(A.lesComptes[i].getClass().getName().length()+1));
+                    if ((A.lesComptes[i] instanceof ComptePayant) && (m > ComptePayant.getCompteur()))
+                            ComptePayant.setCompteur(m);
+                    else if ((A.lesComptes[i] instanceof CompteEpargne) && (m > CompteEpargne.getCompteur()))
+                            CompteEpargne.setCompteur(m);
+                }
             }
             ois.close(); fis.close();
         }
     }
+
+    public String getAdresse() {
+        return adresse;
+    }
+    public Compte getCompte(int i) { return lesComptes[i]; }
+    public Client getClient(int i) { return lesClients[i]; }
+    public String getNumero() { return numero; }
+    public int getNbClients() { return iClient; }
+    public int getNbComptes() { return iCompte; }
 }
-
-
