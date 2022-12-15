@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 /**
  * todo list
- * 1- compteur des operations
- * 2- reste d'autentifications
+ * 1- Solde le ...
  */
 public class ATM {
     public static void main (String[] args) throws IOException, ClassNotFoundException {
@@ -24,12 +23,17 @@ public class ATM {
         FileInputStream fis = new FileInputStream(f1);
         ObjectInputStream ois = new ObjectInputStream(fis);
         A0 = (Agence) ois.readObject();
-        ois.close(); fis.close();
         CL0 = A0.getClient(0);
+        // Test de du virement s'il a bien ete effectué ( je me connecte sur le compte destinataire ComptePayant:3
+        // A0 = (Agence) ois.readObject(); CL0 = A0.getClient(1);
+        ois.close(); fis.close();
 
         Authentification Auth = new Authentification(CL0);
+
         if(Auth.connect()){
             Auth.compte();
+            // Le demarrage des operation ne peut se faire qu'apres l'autentification dans un des comptes
+            Operation.demarrage();
             int menu;
             do {
                 switch ( menu = Auth.menu() ){
@@ -38,16 +42,15 @@ public class ATM {
                     case 3 -> Auth.virement();
                     case 4 -> Auth.solde();
                     case 5 -> Auth.releve();
+                    case 6 -> menu=0;
                 }
                 if(menu==0){
-                    Auth.sure();
+                    menu = Auth.sure();
                 }
             } while (menu > 0);
 
         }
-
         Auth.fin(30);
-
     }
     public static void progTest() throws IOException, ClassNotFoundException{
         // Simunation d'un compte deja existant
@@ -59,12 +62,12 @@ public class ATM {
 
         Agence A02 = new Agence("Agadir Dakhla");
         Client C02 = new Client(A02,"Alaoui","Ahmed","Secteur B Villa 8 Sonaba");
-        C01.setPassword(2222);
+        C02.setPassword(2222);
         Compte CM3 = new ComptePayant(C02,10000);
         Compte CM4 = new CompteEpargne(C02,1000);
 
         Client C03 = new Client(A02,"BAKA","Mohamed","Residence lka=hair Talborjt");
-        C01.setPassword(3333);
+        C03.setPassword(3333);
         Compte CM5 = new ComptePayant(C03,5000);
     }
 }

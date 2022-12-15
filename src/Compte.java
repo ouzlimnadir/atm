@@ -5,7 +5,7 @@ public class Compte implements Serializable {
     protected double solde;
     protected Client Proprietaire;
 
-    public Compte (Client sonClient, double depotInit) {
+    protected Compte (Client sonClient, double depotInit) {
         Proprietaire = sonClient;
         solde = depotInit;
     }

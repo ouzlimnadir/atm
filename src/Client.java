@@ -28,13 +28,8 @@ public class Client implements Serializable{
             monAgence.addCompte(nvCompte);
         }
     }
-    public boolean deposer(int i, double money){
-        if((i >= 0) && (i < iCompte)) {
-            mesComptes[i].deposer(money);
-            return true;
-        }
-        else
-            return false;
+    public void deposer(int i, double money){
+        mesComptes[i].deposer(money);
     }
     public void retirer(int i, double money){
         mesComptes[i].retirer(money);

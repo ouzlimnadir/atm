@@ -1,24 +1,29 @@
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class Virement extends Operation{
     private static int compteur = 0;
     private double somme;
-    private String destinataire;
-    private String numCompteDestinataire;
-    private String agenceDestinataire;
-    private String agenceAdresseDestinataire;
+    private Compte dest;
 
-    protected Virement(Compte Cm, Compte Cd, double somme) throws IOException, SecurityException, ClassNotFoundException{
-        super(Cm);
+    public Virement(String g, Compte Cm, Compte Cd, double somme) throws IOException, SecurityException, ClassNotFoundException{
+        super(g,Cm,somme);
         this.setNumOp(this.getClass().getName().substring(0,3)+(++compteur));
         this.somme = somme;
-        this.destinataire = Cd.getProprietaire().getNom().toUpperCase() + " " + Cd.getProprietaire().getPrenom();
-        this.numCompteDestinataire = Cd.getCode();
-        this.agenceDestinataire = Cd.getProprietaire().getMonAgence().getNumero();
-        this.agenceAdresseDestinataire = Cd.getProprietaire().getMonAgence().getAdresse();
+        this.dest = Cd;
         Cm.retirer(somme);
         Cd.deposer(somme);
-        save();
+    }
+
+    public String toString(){
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return s.format(dateOp) + " "
+                + getClass().getName() + " "
+                + getNumOp() + " "
+                + getGab() + " "
+                + dest.getCode() + " "
+                + somme + " "
+                + "-";
     }
 
     public static int getCompteur() {

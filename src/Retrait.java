@@ -1,15 +1,26 @@
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class Retrait extends Operation{
     private static int compteur = 0;
     private double somme;
 
-    protected Retrait(Compte Cm, double somme) throws IOException, SecurityException, ClassNotFoundException{
-        super(Cm);
+    public Retrait(String g, Compte Cm, double somme) throws IOException, SecurityException, ClassNotFoundException{
+        super(g,Cm,somme);
         this.setNumOp(this.getClass().getName().substring(0,3)+(++compteur));
         this.somme = somme;
         Cm.retirer(somme);
-        save();
+    }
+
+    public String toString(){
+        SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return s.format(dateOp) + " "
+                + getClass().getName() + " "
+                + getNumOp() + " "
+                + getGab() + " "
+                + "- "
+                + somme + " "
+                + "-";
     }
 
     public static int getCompteur() {

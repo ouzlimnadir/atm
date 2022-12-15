@@ -51,7 +51,7 @@ public class Agence implements Serializable {
             Object O;
             Agence P;
             while(!((O = ois.readObject()) instanceof EofIndicatorClass)){
-                P=(Agence) O;
+                P = (Agence) O;
                 if(equals(P)) {
                     found = true;
                     break;
@@ -94,13 +94,10 @@ public class Agence implements Serializable {
             Agence P;
             while(!((O = ois.readObject()) instanceof EofIndicatorClass)){
                 P=(Agence) O;
-                if(equals(P)) {
+                if(equals(P))
                     P = this;
-                    System.out.println("Mise a jour reussi");
-                }
                 oos.writeObject(P);
             }
-            oos.writeObject(this);
             oos.writeObject(new EofIndicatorClass());
 
             oos.close(); fos.close();
@@ -148,7 +145,7 @@ public class Agence implements Serializable {
                     compteur=a;
                 // Set Compteur de client au demarrage du programme
                 for(int i=0; i<A.iClient; i++) {
-                    c = Integer.parseInt(A.lesClients[i].getCode().substring(A.lesComptes[i].getClass().getName().length()+1));
+                    c = Integer.parseInt(A.lesClients[i].getCode().substring(A.lesClients[i].getClass().getName().length()+1));
                     if(c>Client.getCompteur())
                         Client.setCompteur(c);
                 }
@@ -163,6 +160,26 @@ public class Agence implements Serializable {
             }
             ois.close(); fis.close();
         }
+    }
+
+    public static Compte checkCompte(String check) throws IOException, SecurityException, ClassNotFoundException{
+        Compte Cc = null;
+        File f1 = new File (monFic);
+        FileInputStream fis = new FileInputStream(f1);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Object O;
+        Agence A;
+        while(!((O = ois.readObject()) instanceof EofIndicatorClass)){
+            A = (Agence) O;
+            for (int i=0; i< A.iCompte; i++){
+                if(A.lesComptes[i].getCode().equals(check)) {
+                    Authentification.setAgenceDest(A);
+                    Cc = A.lesComptes[i];
+                }
+            }
+        }
+        ois.close(); fis.close();
+        return Cc;
     }
 
     public String getAdresse() {
