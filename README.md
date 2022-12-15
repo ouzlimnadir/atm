@@ -1,7 +1,5 @@
 # **ATM**
 
----
-
 ## Mini projet Servant à pratiquer nos connaisances en JAVA
 
 #### Ce projet consiste à développez une application console permettant de simuler l'usage d'un guichet automatique par un client de la banque. L’application doit permettre au client d’effectuer les opérations suivantes :
