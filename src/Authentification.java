@@ -56,7 +56,7 @@ public class Authentification {
             nonCadreString("2. Depot", width);
             nonCadreString("3. Virement", width);
             nonCadreString("4. Solde", width);
-            nonCadreString("5. Releve banquaire", width);
+            nonCadreString("5. Releve bancaire", width);
             nonCadreString("6. Quitter", width);
             cadreBarre(width,m);
             nonCadreString("Votre choix :", width);
@@ -194,7 +194,7 @@ public class Authentification {
 
         // Entete du doc
         cadreBarre(width,h);
-        cadreString("Releve Banquaire",width);
+        cadreString("Releve Bancaire",width);
         cadreBarre(width,m);
         nonCadreString("BMTOZ Banque Of Morocco ",width);
         nonCadreString(Cl.getMonAgence().getNumero(),width);
