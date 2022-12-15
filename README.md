@@ -1,6 +1,5 @@
 # **ATM**
-
----
+------------
 
 ## Mini projet Servant à pratiquer nos connaisances en JAVA
 
