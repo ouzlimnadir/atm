@@ -2,4 +2,4 @@
 out
 ATM.iml
 *.ser
-src\META-INF
+src/META-INF/
