@@ -7,7 +7,7 @@ public class Operation implements Serializable {
     private static final String tmpFic = "tmpOperation.ser";
 
     protected Date dateOp;
-    private double somme;
+    protected double somme;
     private String gab;
 
     private String numOp;
