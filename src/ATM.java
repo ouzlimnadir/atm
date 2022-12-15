@@ -2,10 +2,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-/**
- * todo list
- * 1- Solde le ...
- */
+
 public class ATM {
     public static void main (String[] args) throws IOException, ClassNotFoundException {
         // Au demarrage du programme, celui ci remet les compteurs en fonction des fichiers disponibles
