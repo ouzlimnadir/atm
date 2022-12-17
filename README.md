@@ -14,3 +14,17 @@
 > Pour la sauvegarde des données, elle se fait à l'aide de l'interface **"serializable"**
 
 > Les données sont initialisé dès la premiere ouverture de l'application pour faciliter les testes
+
+## Prerequisites
+Since this is a java project, you need to have java installed on your machine
+
+## Installation
+
+Install `JDK 18` from [here](https://www.oracle.com/java/technologies/downloads/#java18)
+## Usage 
+
+Go to `Releases`, Download the JAR executable file, you can run it with the command line
+
+```sh
+java -jar ATM.jar
+```
