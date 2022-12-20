@@ -34,11 +34,11 @@ public class ATM {
             int menu;
             do {
                 switch ( menu = Auth.menu() ){
-                    case 1 -> Auth.retrait();
-                    case 2 -> Auth.depot();
-                    case 3 -> Auth.virement();
-                    case 4 -> Auth.solde();
-                    case 5 -> Auth.releve();
+                    case 1 -> menu = Auth.retrait();
+                    case 2 -> menu = Auth.depot();
+                    case 3 -> menu = Auth.virement();
+                    case 4 -> menu = Auth.solde();
+                    case 5 -> menu = Auth.releve();
                     case 6 -> menu=0;
                 }
                 if(menu==0){

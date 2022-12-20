@@ -19,6 +19,7 @@ public class Authentification {
         gab = "GAB"+(int)Math.floor(Math.random()*901+100);
     }
     public boolean connect(){
+        cls0();
         int width = 30;
         Scanner clavier = new Scanner(System.in);
         int i=3;
@@ -44,6 +45,7 @@ public class Authentification {
         return Cl.getPassword() == (this.password);
     }
     public int menu(){
+        cls0();
         int width = 30;
         Scanner clavier = new Scanner(System.in);
         int choix;
@@ -72,6 +74,7 @@ public class Authentification {
         return choix;
     }
     public void compte(){
+        cls0();
         int width = 30;
         Scanner clavier = new Scanner(System.in);
         int choix;
@@ -95,7 +98,8 @@ public class Authentification {
         f = "Op" + f + ".ser";
         Operation.setMonFic(f);
     }
-    public void retrait() throws IOException, SecurityException, ClassNotFoundException{
+    public int retrait() throws IOException, SecurityException, ClassNotFoundException{
+        cls0();
         int width = 50;
         double somme = -1.11 ;
         Scanner clavier = new Scanner(System.in);
@@ -119,8 +123,10 @@ public class Authentification {
         cadreBarre(width,h);
         cadreString(somme + " dh est bien retiree.",width);
         cadreBarre(width,b);
+        return cls();
     }
-    public void depot() throws IOException, ClassNotFoundException {
+    public int depot() throws IOException, ClassNotFoundException {
+        cls0();
         int width = 50;
         double somme = -1.11 ;
         Scanner clavier = new Scanner(System.in);
@@ -143,16 +149,20 @@ public class Authentification {
         cadreBarre(width,h);
         cadreString(somme + " dh est bien deposee.",width);
         cadreBarre(width,b);
+        return cls();
     }
-    public void solde(){
+    public int solde(){
+        cls0();
         int width = 50;
         cadreBarre(width,h);
         cadreString("Solde",width);
         cadreBarre(width,m);
         nonCadreString("Votre solde est : "+Cl.getCompte(compte).getSolde(),width);
         cadreBarre(width,b);
+        return cls();
     }
-    public void virement() throws IOException, ClassNotFoundException {
+    public int virement() throws IOException, ClassNotFoundException {
+        cls0();
         int width = 50;
         double somme = -1.11 ;
         String strCompte;
@@ -188,8 +198,10 @@ public class Authentification {
         cadreBarre(width,h);
         cadreString(somme + " dh est bien envoyee.",width);
         cadreBarre(width,b);
+        return cls();
     }
-    public void releve(){
+    public int releve(){
+        cls0();
         int width = 100;
 
         // Entete du doc
@@ -239,6 +251,7 @@ public class Authentification {
         cadreVide(width);
         nonCadreStringInverse("Solde le "+ s.format(date)+" : " + Cl.getCompte(compte).getSolde(),width);
         cadreBarre(width,b);
+        return cls();
     }
     public void ligneOp(String S){
         char barrette = '|';
@@ -299,6 +312,23 @@ public class Authentification {
             choix = clavier.nextInt();
         } while (( choix != 0)&&(choix != 1));
         return choix;
+    }
+    public int cls(){
+        int width = 30;
+        int choix;
+        Scanner clavier = new Scanner(System.in);
+        cadreBarre(width,h);
+        cadreString("1. Retour      0. Quitter",width);
+        System.out.print("|          ");
+        choix = clavier.nextInt();
+        cadreBarre(width,b);
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+        return choix;
+    }
+    public void cls0(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 
